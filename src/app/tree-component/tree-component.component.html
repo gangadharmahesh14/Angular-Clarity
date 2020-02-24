@@ -1,0 +1,28 @@
+<div>
+<div class="clr-form-control">
+    <label for="select-full" class="clr-control-label">Inventory List :</label>
+    <div class="clr-control-container">
+      <div class="clr-select-wrapper">
+        <select id="select-full" [(ngModel)]="selectedTree" (change)="onChange($event)">
+            <option [ngValue]="[]">Select the inventoty</option>
+            <option *ngFor="let data of inventoty" [ngValue]="data.items">{{data.lable}}</option>
+        </select>
+        <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+      </div>
+      <!-- <span class="clr-subtext">Helper Text</span> -->
+    </div>
+</div>
+<!-- tree node section as per selection -->
+<clr-tree>
+    <clr-tree-node *ngFor="let CLUSTER of treeData"
+        [(clrSelected)]="CLUSTER.selected"
+        [clrExpanded]="true">
+        {{CLUSTER.lable}}
+        <clr-tree-node *ngFor="let HOST of CLUSTER.items" [(clrSelected)]="HOST.selected">
+            {{HOST.lable}}
+        </clr-tree-node>
+    </clr-tree-node>
+</clr-tree>
+<br/>
+{{treeData | json}}
+</div>
